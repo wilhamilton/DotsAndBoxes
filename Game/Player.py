@@ -4,7 +4,7 @@ The Player Class.
 Defines a player in the game.
 """
 
-from Game import Board
+# from Game import Board
 from Game import Move
 
 
