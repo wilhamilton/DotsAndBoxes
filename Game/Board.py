@@ -4,7 +4,7 @@ The Game Module.
 The game module is used to represent the game board for Dots and Boxes.
 """
 
-from Game import Dot
+from Game.Dot import Dot
 
 
 class Board:
@@ -12,9 +12,13 @@ class Board:
 
     def __init__(self, gridSize):
         """Initialize the game object."""
-        for i in gridSize[0]:
-            for j in gridSize[1]:
-                self.grid[i][j] = Dot()
+        self.grid = []
+
+        for i in range(0, gridSize[0]):
+            new = []
+            for j in range(0, gridSize[1]):
+                new.append(Dot())
+            self.grid.append(new)
 
     def setEdge(self, move):
         """Update the gameboard based on a move."""

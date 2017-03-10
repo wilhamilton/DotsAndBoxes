@@ -9,5 +9,5 @@ class Game:
         self.board = board
         self.players = players
 
-    def play():
+    def play(self):
         """Play the game."""
