@@ -69,4 +69,23 @@ class Board:
 
     def draw(self):
         """Output the Gameboard visually."""
+        # Intending to use matplotlib here?
         pass
+
+    def __str__(self):
+        """Game board to a string representation of dashes/pipes, e.g. for shell print"""
+        outstr = ""
+        for i, row in enumerate(self.grid)
+            # Build the string for one row here, starting with *'s for dots
+            for j, dot in enumerate(row)
+                outstr += "*"
+                # For all but right-most dot in row, draw horizontal lines as necessary 
+                if j != len(row-1)
+                    outstr += "-" if dot.horizontal is not None else " "
+            # Then add in the vertical lines below the dots, and indicate owner if any
+            # Note this doesn't apply for the last row
+            if i != len(self.grid)
+                outstr += "\n"
+                for dot in row
+                    outstr += "|"
+                    outstr += " " if dot.owner == None else str(dot.owner)
