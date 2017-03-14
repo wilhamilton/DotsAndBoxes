@@ -9,8 +9,8 @@ made the move.
 class Move:
     """A Move in the Game."""
 
-    def __init__(self, coordinate, edgeDirection, playerId):
+    def __init__(self, coordinate, edge_direction, player_id):
         """Create a game move."""
         self.coordinate = coordinate
-        self.edgeDirection = edgeDirection
-        self.player = playerId
+        self.edge_direction = edge_direction
+        self.player = player_id

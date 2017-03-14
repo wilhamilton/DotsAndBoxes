@@ -10,62 +10,77 @@ from Game.Dot import Dot
 class Board:
     """The actual game class."""
 
-    def __init__(self, gridSize):
+    def __init__(self, grid_size):
         """Initialize the game object."""
         self.grid = []
-        self.rows = gridSize[0]
-        self.cols = gridSize[1]
+        self.rows = grid_size[0]
+        self.cols = grid_size[1]
 
         # create the gameboard as a 2D array of dots
         for i in range(0, self.rows):
-            newRow = []
+            new_row = []
             for j in range(0, self.cols):
-                newRow.append(Dot())
-            self.grid.append(newRow)
+                new_row.append(Dot())
+            self.grid.append(new_row)
 
-    def setEdge(self, move):
+    def set_edge(self, move):
         """Update the gameboard based on a move."""
-        i = move.coordinate[0]
-        j = move.coordinate[1]
+        # get the location of the dot we will be trying to set an edge for
+        i = move.coordinate[0]  # get the row the dot is in
+        j = move.coordinate[1]  # get the column the dot is in
 
-        if move.edgeDirection:
-            # horizontal edge indicated by edgeDirection == true
-            returnVal = self.grid[i][j].setHorizontalEdge(move.player)
+        if move.edge_direction:
+            # horizontal edge indicated by edge_direction being true
+            return_val = self.grid[i][j].set_horizontal_edge(move.player)
         else:
-            returnVal = self.grid[i][j].setVerticalEdge(move.player)
+            # vertical edge
+            return_val = self.grid[i][j].set_vertical_edge(move.player)
 
-        if returnVal:
-            self.checkSquares(i, j, move.edgeDirection)
+        if return_val:
+            # we were able to set an edge so we need to check to see if we
+            # created any new squares when that edge was added
+            self.check_for_squares(move)
 
-        return returnVal
+        return return_val
 
-    def checkSquares(self, i, j, edge):
+    def check_for_squares(self, move):
         """Check to see if the edge just added produced a square."""
+        # get the location of the dot we will be trying to set an edge for
+        i = move.coordinate[0]  # get the row the dot is in
+        j = move.coordinate[1]  # get the column the dot is in
+
         if i < self.rows-1 and j < self.cols-1:
             # we only want to check this square if it's not on the bottom/right
-            self.isSquare(i, j)
+            self.is_a_square(i, j, move.player)
 
-        if edge:
+        # whenever we create an edge we have the possibility of creating more
+        # than one square.  check for those other squares
+        if move.edge_direction:
             # we created a horizontal edge, we need to check the square above
             if i-1 >= 0:
                 # make sure we are not at the top of the board
-                self.isSquare(i-1, j)
+                self.is_a_square(i-1, j, move.player)
         else:
             if j-1 >= 0:
                 # make sure we are not at the left side of the board
-                self.isSquare(i, j-1)
+                self.is_a_square(i, j-1, move.player)
         pass
 
-    def isSquare(self, i, j):
+    def is_a_square(self, i, j, player):
         """Check to see if the current dot (defined by i,j) is a square."""
         dot = self.grid[i][j]
         right = self.grid[i][j+1]
         bottom = self.grid[i+1][j]
 
         if dot.horizontal is not None and dot.vertical is not None:
-            # do a thing
-            pass
-        pass
+            # the current dot has both edges, see if the neighbors have the
+            # appropriate edges
+            if right.vertical is not None and bottom.horizontal is not None:
+                # out neighbors have the correct edges, we have a square
+                return self.grid[i][j].set_as_square(player)
+
+        # we only get here if we don't have a square
+        return False
 
     def draw(self):
         """Output the Gameboard visually."""
