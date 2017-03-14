@@ -73,22 +73,30 @@ class Board:
         pass
 
     def __str__(self):
-        """Game board to a string representation of dashes/pipes, e.g. for shell print"""
+        """
+        To string function.
+
+        Prints game board as a serires of dashes/pipes
+         e.g. for shell print
+        """
         outstr = ""
         for i, row in enumerate(self.grid):
             # Build the string for one row here, starting with *'s for dots
             for j, dot in enumerate(row):
                 outstr += "*"
-                # For all but right-most dot in row, draw horizontal lines as necessary 
+                # For all but right-most dot in row,
+                # draw horizontal lines as necessary
                 if j != len(row)-1:
                     outstr += "---" if dot.horizontal is not None else "   "
-            # Then add in the vertical lines below the dots, and indicate owner if any
+            # Then add in the vertical lines below the dots,
+            # and indicate owner if any
             # Note this doesn't apply for the last row
             if i != len(self.grid)-1:
                 outstr += '\n'
                 for dot in row:
                     outstr += "|" if dot.vertical is not None else " "
-                    outstr += "   " if dot.owner == None else " " + str(dot.owner) + " "
+                    outstr += "   " if dot.owner is None else " " \
+                        + str(dot.owner) + " "
                 outstr += '\n'
 
         return outstr
