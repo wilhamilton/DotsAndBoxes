@@ -13,4 +13,5 @@ game = Game(board, [player1, player2])
 
 game.play()
 
+print(board)
 print("test")

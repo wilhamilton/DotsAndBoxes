@@ -41,7 +41,7 @@ class Board:
 
     def checkSquares(self, i, j, edge):
         """Check to see if the edge just added produced a square."""
-        if i < self.rows and j < self.cols:
+        if i < self.rows-1 and j < self.cols-1:
             # we only want to check this square if it's not on the bottom/right
             self.isSquare(i, j)
 
@@ -75,17 +75,20 @@ class Board:
     def __str__(self):
         """Game board to a string representation of dashes/pipes, e.g. for shell print"""
         outstr = ""
-        for i, row in enumerate(self.grid)
+        for i, row in enumerate(self.grid):
             # Build the string for one row here, starting with *'s for dots
-            for j, dot in enumerate(row)
+            for j, dot in enumerate(row):
                 outstr += "*"
                 # For all but right-most dot in row, draw horizontal lines as necessary 
-                if j != len(row-1)
-                    outstr += "-" if dot.horizontal is not None else " "
+                if j != len(row)-1:
+                    outstr += "---" if dot.horizontal is not None else "   "
             # Then add in the vertical lines below the dots, and indicate owner if any
             # Note this doesn't apply for the last row
-            if i != len(self.grid)
-                outstr += "\n"
-                for dot in row
-                    outstr += "|"
-                    outstr += " " if dot.owner == None else str(dot.owner)
+            if i != len(self.grid)-1:
+                outstr += '\n'
+                for dot in row:
+                    outstr += "|" if dot.vertical is not None else " "
+                    outstr += "   " if dot.owner == None else " " + str(dot.owner) + " "
+                outstr += '\n'
+
+        return outstr
