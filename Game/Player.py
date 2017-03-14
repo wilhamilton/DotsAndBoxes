@@ -5,7 +5,7 @@ Defines a player in the game.
 """
 
 # from Game import Board
-from Game import Move
+# from Game import Move
 
 
 class Player:
@@ -15,7 +15,10 @@ class Player:
         """Create a player."""
         self.id = id
 
-    def makeMove(self, board):
-        """Make a game move based on the current gameboard state."""
-        myMove = Move([0, 0], True, self.id)
-        return myMove
+    def request_move(self, board):
+        """
+        Make a game move based on the current gameboard state.
+
+        Should return an instance of the move class.
+        """
+        pass
