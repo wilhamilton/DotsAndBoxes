@@ -110,10 +110,12 @@ class Board:
             # Note this doesn't apply for the last row
             if i != len(self.grid)-1:
                 outstr += '\n'
-                for dot in row:
+                for j, dot in enumerate(row):
                     outstr += "|" if dot.vertical is not None else " "
-                    outstr += "   " if dot.owner is None else " " \
-                        + str(dot.owner) + " "
+                    # If not in the last column, write " <owner> " or "   "
+                    if j != len(row)-1:
+                        outstr += "   " if dot.owner is None else " " \
+                            + str(dot.owner) + " "
                 outstr += '\n'
 
         return outstr

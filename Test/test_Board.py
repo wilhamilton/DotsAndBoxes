@@ -39,14 +39,14 @@ class TestBoard(unittest.TestCase):
         # Note - dims passed in here are the number of dots, not boxes
         btest1 = Board([3, 3])
         for m in moves:
-            btest1.setEdge(m)
+            btest1.set_edge(m)
 
         # Try displaying and see if matches expected result
-        expectdS = ("*---*   *\n"
-                    "| B |    \n"
-                    "*---*   *\n"
+        expectdS = ("o---o   o\n"
+                    "| 2 |    \n"
+                    "o---o   o\n"
                     "|   |   |\n"
-                    "*   *---*\n")
+                    "o   o---o")
         debugmsg = "\n\n" + str(btest1) + "\n\n" + expectdS + "\n\n"
         self.assertEqual(str(btest1), expectdS, debugmsg)
 
