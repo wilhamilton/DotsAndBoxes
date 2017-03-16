@@ -15,6 +15,8 @@ class Board:
         self.grid = []
         self.rows = grid_size[0]
         self.cols = grid_size[1]
+        self.number_squares = 0
+        self.max_number_squares = (self.rows - 1) * (self.cols-1)
 
         # create the gameboard as a 2D array of dots
         for i in range(0, self.rows):
