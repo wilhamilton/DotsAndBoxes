@@ -100,7 +100,7 @@ class Board:
         for i, row in enumerate(self.grid):
             # Build the string for one row here, starting with *'s for dots
             for j, dot in enumerate(row):
-                outstr += "*"
+                outstr += "o"
                 # For all but right-most dot in row,
                 # draw horizontal lines as necessary
                 if j != len(row)-1:

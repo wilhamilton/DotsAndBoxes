@@ -11,8 +11,8 @@ class RandomPlayer(Player):
 
     def request_move(self, board):
         """Request a random move based on the current game board."""
-        i = randint(0, board.rows)
-        j = randint(0, board.cols)
+        i = randint(0, board.rows - 1)
+        j = randint(0, board.cols - 1)
 
         if randint(0, 1) is 1:
             temp_direction = True
