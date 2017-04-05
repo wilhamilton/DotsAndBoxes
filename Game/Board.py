@@ -70,9 +70,9 @@ class Board:
 
     def is_a_square(self, i, j, player):
         """Check to see if the current dot (defined by i,j) is a square."""
-        print("i, j, row, cols", i, " ", j, " ", self.rows, " ", self.cols)
+        # print("i, j, row, cols", i, " ", j, " ", self.rows, " ", self.cols)
         if i+1 >= self.rows or j+1 >= self.cols :
-            print("out of bounds")
+            # print("out of bounds")
             return False
             
         dot = self.grid[i][j]
@@ -84,7 +84,8 @@ class Board:
             # appropriate edges
             if right.vertical is not None and bottom.horizontal is not None:
                 # out neighbors have the correct edges, we have a square
-                return self.grid[i][j].set_as_square(player)
+                self.number_squares = self.number_squares + 1
+                return self.grid[i][j].set_as_square(player)                
 
         # we only get here if we don't have a square
         return False

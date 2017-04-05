@@ -7,15 +7,15 @@ from Players.RandomPlayer import RandomPlayer
 
 board = Board([5, 5])
 
-player1 = RandomPlayer(1)
-player2 = RandomPlayer(2)
+player1 = RandomPlayer(0)
+player2 = RandomPlayer(1)
 
 game = Game(board, [player1, player2])
 
 game.play()
 
-temp = player2.request_move(board)
+# temp = player2.request_move(board)
 
-print(temp)
-print(board)
-print("test")
+# print(temp)
+# print(board)
+# print("test")
