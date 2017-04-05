@@ -9,10 +9,9 @@ class Game:
         self.board = board
         self.players = players
         self.score = []
-        
+
         for player in self.players:
             self.score.append(0)
-        
 
     def play(self):
         """Play the game."""
@@ -33,14 +32,13 @@ class Game:
 
     def count_score(self):
         """Count the number of squares each player currently has."""
-
         for player in self.players:
             self.score[player.id] = 0
             for row in self.board.grid:
                 for dot in row:
                     if dot.owner is player.id:
                         self.score[player.id] = self.score[player.id] + 1
-                        
+
     def print_score(self):
         """Print out the current score."""
         i = 0
