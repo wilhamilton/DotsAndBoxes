@@ -22,7 +22,9 @@ class Game:
                 temp_move = player.request_move(self.board)
                 print("Player: " + str(player.id))
                 print("Move: " + str(temp_move))
-                self.board.set_edge(temp_move)
+                """Set edge (warn if illegal move attempted)"""
+                if not self.board.set_edge(temp_move):
+                    print("Illegal move requested by player, turn lost!")
                 self.count_score()
                 self.print_score()
                 print(self.board)

@@ -32,11 +32,22 @@ class Board:
         j = move.coordinate[1]  # get the column the dot is in
 
         if move.edge_direction:
-            # horizontal edge indicated by edge_direction being true
-            return_val = self.grid[i][j].set_horizontal_edge(move.player)
+            # First check that we're in proper bounds for horiz line start
+            if 0 <= i < self.rows and 0 <= j < self.cols-1:
+                # Horizontal edge indicated by edge_direction being true
+                return_val = self.grid[i][j].set_horizontal_edge(move.player)
+            else:
+                # Out of range, couldn't play edge
+                print("Bad horiz play: i,j = " + str(i) + "," + str(j))
+                return_val = False
         else:
-            # vertical edge
-            return_val = self.grid[i][j].set_vertical_edge(move.player)
+            # vertical edge, check bounds for vert line starts
+            if 0 <= i < self.rows-1 and 0 <= j < self.cols:
+                return_val = self.grid[i][j].set_vertical_edge(move.player)
+            else:
+                # Out of range, couldn't play edge
+                print("Bad vert play: i,j = " + str(i) + "," + str(j))
+                return_val = False
 
         if return_val:
             # we were able to set an edge so we need to check to see if we

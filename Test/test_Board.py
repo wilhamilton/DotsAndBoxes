@@ -50,6 +50,21 @@ class TestBoard(unittest.TestCase):
         debugmsg = "\n\n" + str(btest1) + "\n\n" + expectdS + "\n\n"
         self.assertEqual(str(btest1), expectdS, debugmsg)
 
+    # Test that you can't move on top of an older move
+    def test_illegalMove(self):
+        """Try making same move twice in a row, should fail."""
+        pID1 = 1
+        pID2 = 2  # Noting horizontal is true for edge dir...
+        moves = [
+                Move([1, 1], True, pID1),
+                Move([1, 1], True, pID2)
+        ]
+        # Note - dims passed in here are the number of dots, not boxes
+        btest1 = Board([3, 3])
+        btest1.set_edge(moves[0])
+        move_succeeded = btest1.set_edge(moves[1])
+        self.assertEqual(move_succeeded, False, "Repeat move should fail")
+
 
 # Run the tests if this is your top-level
 if __name__ == '__main__':
